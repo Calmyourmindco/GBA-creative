@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Custom Monetization Plan — GBA Creative</title>
+<style>
+  :root {
+    --bg:       #030303;
+    --surface:  #0d0d0d;
+    --border:   #1c1c1c;
+    --gold:     #b8a07a;
+    --gold-dim: #7a6a50;
+    --text:     #e0e0e0;
+    --text-dim: #888;
+    --green:    rgba(74,222,128,1);
+    --blue:     rgba(96,165,250,1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .site-logo {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+  }
+
+  .site-logo span {
+    font-size: 12px;
+    color: var(--text-dim);
+    font-weight: 400;
+    display: block;
+    letter-spacing: 0.04em;
+    margin-top: 1px;
+  }
+
+  .header-contact {
+    font-size: 12px;
+    color: var(--text-dim);
+    text-align: right;
+  }
+
+  .header-contact a {
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #0a0a0a 0%, #111008 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 40px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: 50%;
+    transform: translateX(-50%);
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(184,160,122,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--gold-dim);
+    margin-bottom: 16px;
+  }
+
+  .hero-name {
+    font-size: clamp(36px, 6vw, 58px);
+    font-weight: 800;
+    color: var(--gold);
+    letter-spacing: 0.02em;
+    margin-bottom: 12px;
+    line-height: 1.1;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--text-dim);
+    max-width: 540px;
+    margin: 0 auto 24px;
+    line-height: 1.7;
+  }
+
+  .hero-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .hero-chip {
+    background: rgba(184,160,122,0.1);
+    border: 1px solid rgba(184,160,122,0.2);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* ── CONTENT ── */
+  .content {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* ── SECTION ── */
+  .plan-section {
+    margin-bottom: 40px;
+  }
+
+  .plan-section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .plan-section-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: rgba(184,160,122,0.15);
+    border: 1px solid rgba(184,160,122,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .plan-section-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+  }
+
+  .plan-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 26px 28px;
+  }
+
+  .plan-card p {
+    color: var(--text-dim);
+    font-size: 14px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+  }
+
+  .plan-card p:last-child { margin-bottom: 0; }
+  .plan-card strong { color: var(--text); }
+
+  /* ── REVENUE CARDS ── */
+  .rev-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .rev-card {
+    background: #080808;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+
+  .rev-card-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+  }
+
+  .rev-card-value {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--gold);
+  }
+
+  .rev-card-sub {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 3px;
+  }
+
+  .rev-note {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    padding: 10px 14px;
+    background: rgba(184,160,122,0.05);
+    border-radius: 7px;
+    border: 1px solid rgba(184,160,122,0.12);
+  }
+
+  /* ── PRODUCTS ── */
+  .product-item {
+    background: #080808;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+
+  .product-item:last-child { margin-bottom: 0; }
+
+  .product-price {
+    float: right;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--gold);
+  }
+
+  .product-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .product-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    clear: both;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline-row {
+    display: flex;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+
+  .timeline-row:last-child { border-bottom: none; }
+
+  .timeline-range {
+    min-width: 90px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    padding-top: 1px;
+  }
+
+  .timeline-task {
+    flex: 1;
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.55;
+  }
+
+  .timeline-rev {
+    min-width: 80px;
+    text-align: right;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--green);
+  }
+
+  .timeline-total {
+    margin-top: 16px;
+    padding: 14px 16px;
+    background: #080808;
+    border-radius: 8px;
+    display: flex;
+    gap: 24px;
+    font-size: 13px;
+    flex-wrap: wrap;
+    color: var(--text-dim);
+  }
+
+  .timeline-total strong { color: var(--green); }
+  .timeline-total .gold  { color: var(--gold); }
+
+  /* ── CTA ── */
+  .cta-card {
+    background: linear-gradient(135deg, rgba(184,160,122,0.1) 0%, rgba(184,160,122,0.04) 100%);
+    border: 1px solid rgba(184,160,122,0.3);
+    border-radius: 16px;
+    padding: 40px 36px;
+    text-align: center;
+    margin-top: 48px;
+  }
+
+  .cta-card h2 {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--gold);
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+  }
+
+  .cta-card p {
+    font-size: 14px;
+    color: var(--text-dim);
+    max-width: 460px;
+    margin: 0 auto 24px;
+    line-height: 1.7;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--gold);
+    color: #000;
+    font-weight: 800;
+    font-size: 14px;
+    padding: 14px 36px;
+    border-radius: 8px;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: opacity 0.15s;
+  }
+
+  .cta-btn:hover { opacity: 0.88; }
+
+  .cta-fine {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 14px;
+  }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 24px 40px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  .site-footer a { color: var(--gold); text-decoration: none; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  /* ── ERROR STATE ── */
+  .error-state {
+    max-width: 480px;
+    margin: 100px auto;
+    text-align: center;
+    padding: 40px 24px;
+  }
+
+  .error-state h2 { color: var(--gold); font-size: 22px; margin-bottom: 12px; }
+  .error-state p  { color: var(--text-dim); font-size: 14px; line-height: 1.7; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .site-header { padding: 16px 20px; }
+    .hero        { padding: 40px 20px 36px; }
+    .content     { padding: 32px 16px 60px; }
+    .plan-card   { padding: 20px; }
+    .cta-card    { padding: 28px 20px; }
+    .header-contact { display: none; }
+    .timeline-rev { display: none; }
+    .rev-card-value { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="site-logo">
+    GBA Creative
+    <span>Digital Product Strategy</span>
+  </div>
+  <div class="header-contact">
+    Avery N. &nbsp;·&nbsp; <a href="mailto:gbacreativeco@gmail.com">gbacreativeco@gmail.com</a>
+  </div>
+</header>
+
+<!-- CONTENT rendered by JS below -->
+<div id="app"></div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <p>Built by <a href="https://gba-creative.github.io/GBA-Creative" target="_blank">GBA Creative</a> &nbsp;·&nbsp; Custom monetization strategy for digital creators</p>
+</footer>
+
+<script>
+(function () {
+
+  // ── helpers ──
+  function esc(s) {
+    return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function fmt(n) {
+    return '$' + Math.round(n).toLocaleString();
+  }
+
+  function parseFollowers(raw) {
+    const s = String(raw || '').replace(/,/g, '').trim().toUpperCase();
+    if (s.endsWith('M')) return Math.round(parseFloat(s) * 1000000);
+    if (s.endsWith('K')) return Math.round(parseFloat(s) * 1000);
+    return parseInt(s) || 0;
+  }
+
+  function categorize(niche) {
+    const n = (niche || '').toLowerCase();
+    if (/postpartum|pregnan/.test(n)) return 'postpartum';
+    if (/fit|gym|workout|exercise|train|weight|muscle|yoga|pilates/.test(n)) return 'fitness';
+    if (/financ|money|budget|invest|wealth|debt|saving|credit|crypto|stock/.test(n)) return 'finance';
+    if (/food|cook|recipe|bake|kitchen|meal|nutrition|chef/.test(n)) return 'food';
+    if (/beauty|makeup|skincare|fashion|style|ootd|hair|nails/.test(n)) return 'beauty';
+    if (/mom|parent|baby|child|family|kid|toddler|newborn/.test(n)) return 'parenting';
+    if (/travel|adventure|explore|wander|nomad|destination/.test(n)) return 'travel';
+    if (/business|entrepreneur|hustle|startup|side.?hustle|freelance/.test(n)) return 'business';
+    if (/sobriety|sober|recovery|mental|mindset|anxiety|wellness|selfcare/.test(n)) return 'wellness';
+    if (/ugc|content.?creator|brand|collab/.test(n)) return 'ugc';
+    if (/edu|teach|learn|tutor|study|course|school/.test(n)) return 'education';
+    if (/lifestyle|vlog|daily|routine|productivity/.test(n)) return 'lifestyle';
+    return 'general';
+  }
+
+  function getProducts(cat) {
+    const map = {
+      fitness:    [{ name:'12-Week Workout Program', price:47, desc:'A complete downloadable training program with progressive weekly schedules, exercise demos, and a results tracker — built around your exact content style.' }, { name:'Nutrition & Meal Prep Guide', price:27, desc:'Done-for-you weekly meal plans, macro-friendly grocery lists, and 30+ quick recipes. Exactly what your audience already asks you for.' }, { name:'1-Month Online Coaching', price:297, desc:'Fully personalized training and nutrition with weekly check-in calls and direct message support. Your highest-revenue offer.' }],
+      postpartum: [{ name:'Postpartum Recovery Program', price:57, desc:'Safe, progressive 8-week return-to-fitness plan designed specifically for postpartum bodies, including pelvic floor guidance.' }, { name:'New Mom Meal Plan Bundle', price:27, desc:'Quick, one-hand meals and breastfeeding-friendly nutrition guide for busy moms who have zero time.' }, { name:'Postpartum Coaching Package', price:247, desc:'4-week 1:1 support with custom movement plan, nutrition guidance, and weekly check-in calls.' }],
+      finance:    [{ name:'Budget Planner & Tracker Bundle', price:17, desc:'Done-for-you Google Sheets system with automated savings goals, debt payoff tracker, and monthly rollup dashboard.' }, { name:'Financial Freedom Mini Course', price:97, desc:'5-module video course covering budgeting, emergency funds, debt payoff, and building wealth habits.' }, { name:'1:1 Money Coaching Session', price:197, desc:'60-minute strategy call with a custom 90-day financial action plan built around their specific situation.' }],
+      food:       [{ name:'Recipe & Meal Prep eBook', price:22, desc:'30+ quick, healthy recipes with shopping lists, meal prep timelines, and macro breakdowns.' }, { name:'Weekly Meal Planning Membership', price:19, desc:'Monthly subscription — fresh meal plans, grocery lists, and video walkthroughs delivered every Monday.' }, { name:'Cooking Masterclass Bundle', price:127, desc:'Video series teaching core techniques, knife skills, flavor building, and how to cook without a recipe.' }],
+      beauty:     [{ name:'Skincare Routine Guide', price:19, desc:'Personalized AM/PM skincare system broken down by skin type with product recommendations at every budget.' }, { name:'Makeup Masterclass', price:77, desc:'Video tutorial bundle covering everyday glam, evening looks, blending techniques, and product dupes.' }, { name:'Virtual Beauty Consultation', price:147, desc:'45-minute 1:1 session to audit their current routine and build a custom plan with product swaps.' }],
+      parenting:  [{ name:'New Parent Survival Guide', price:27, desc:'Comprehensive digital resource covering sleep schedules, feeding, development milestones, and sanity-saving hacks.' }, { name:'Kids Activity & Learning Bundle', price:19, desc:'100+ age-sorted activities for toddlers and kids — educational, creative, and screen-free.' }, { name:'Parenting Strategy Session', price:197, desc:'60-minute 1:1 for parents needing real guidance on sleep training, tantrums, routines, or big transitions.' }],
+      travel:     [{ name:'Destination Travel Guide', price:17, desc:'Deep-dive city guide with local neighborhoods, hidden gems, honest budget tips, and a customizable itinerary template.' }, { name:'Budget Travel Masterclass', price:67, desc:'Step-by-step course on flight hacking, cheap accommodation, travel rewards, and planning any trip on any budget.' }, { name:'Custom Itinerary Service', price:147, desc:'Done-for-you travel planning — a day-by-day itinerary built around the client\'s destination, travel style, and budget.' }],
+      business:   [{ name:'Side Hustle Starter Kit', price:37, desc:'Plug-and-play templates, outreach scripts, pricing frameworks, and systems to launch a service business in 30 days.' }, { name:'Scale to $5K/Month Course', price:197, desc:'Step-by-step course on finding clients, pricing your offer, delivering results, and scaling to consistent income.' }, { name:'1:1 Business Strategy Intensive', price:297, desc:'90-minute session to map their offer, identify their audience, and build a 60-day client acquisition plan.' }],
+      wellness:   [{ name:'Mindset & Wellness Workbook', price:22, desc:'Guided digital workbook with journal prompts, habit trackers, and mindset exercises for lasting change.' }, { name:'30-Day Wellness Reset Program', price:67, desc:'Daily audio guides, habit challenges, and accountability tools for a complete mental wellness overhaul.' }, { name:'4-Week Coaching & Accountability', price:247, desc:'Weekly 1:1 calls, custom practices, daily check-ins, and between-session messaging support.' }],
+      ugc:        [{ name:'UGC Creator Starter Pack', price:37, desc:'Pitch templates, rate card framework, portfolio template, and negotiation scripts to land paid brand deals.' }, { name:'Brand Deal Mastery Course', price:127, desc:'Video course on finding brands, pitching cold, negotiating rates, and building recurring brand relationships.' }, { name:'UGC Coaching Intensive', price:247, desc:'Portfolio audit and strategy session to position you for $3K–$10K/month in brand partnerships.' }],
+      education:  [{ name:'Study System & Template Bundle', price:27, desc:'Note-taking templates, study schedules, and proven systems for learning faster and retaining more.' }, { name:'Signature Mini Course', price:97, desc:'Self-paced video course teaching your core expertise in a structured, beginner-friendly format.' }, { name:'1:1 Tutoring Package', price:197, desc:'4-session program with a custom curriculum built around exactly what the student needs.' }],
+      lifestyle:  [{ name:'Digital Planner & Productivity Bundle', price:22, desc:'Notion/GoodNotes-compatible planners, habit trackers, and goal-setting templates.' }, { name:'Morning Routine Masterclass', price:47, desc:'Step-by-step video guide to building a consistent, high-output morning routine that actually sticks.' }, { name:'1:1 Life Coaching Session', price:197, desc:'60-minute goal-mapping session with a custom 90-day action plan and accountability check-ins.' }],
+      general:    [{ name:'Signature Resource Guide', price:27, desc:'A beginner-friendly downloadable guide or template bundle solving your audience\'s #1 problem.' }, { name:'Mini Course', price:97, desc:'3–5 module video course teaching your core expertise, hosted on Gumroad or Stan Store.' }, { name:'1:1 Coaching Package', price:247, desc:'4-week personalized coaching with a custom plan, weekly calls, and direct message support.' }],
+    };
+    return map[cat] || map.general;
+  }
+
+  function getRevenue(followers, sbEarnHigh) {
+    let cPerK, oPerK;
+    if (followers < 5000)        { cPerK = 40;  oPerK = 120; }
+    else if (followers < 20000)  { cPerK = 60;  oPerK = 180; }
+    else if (followers < 50000)  { cPerK = 70;  oPerK = 200; }
+    else if (followers < 100000) { cPerK = 80;  oPerK = 240; }
+    else if (followers < 500000) { cPerK = 55;  oPerK = 170; }
+    else                         { cPerK = 30;  oPerK = 100; }
+    const k = followers / 1000;
+    let con = Math.round(k * cPerK);
+    let opt = Math.round(k * oPerK);
+    if (sbEarnHigh) {
+      const sbProduct = Math.round(sbEarnHigh * 4.5);
+      con = Math.round((con + sbProduct) / 2);
+      opt = Math.max(opt, Math.round(sbProduct * 1.6));
+    }
+    return { conservative: con, optimistic: opt };
+  }
+
+  function get14Day(products, followers) {
+    const p    = products[0];
+    const rate = followers < 10000 ? 0.004 : followers < 50000 ? 0.002 : followers < 100000 ? 0.0015 : 0.001;
+    const sales = Math.max(2, Math.round(followers * rate));
+    const total = sales * p.price;
+    return {
+      product: p, totalSales: sales, totalRevenue: total,
+      days: [
+        { range:'Days 1–2',   task:'Product creation — build the digital product and set up your payment link', revenue:0 },
+        { range:'Days 3–4',   task:'Audience warm-up — tease it on stories, poll your followers about their #1 struggle', revenue:0 },
+        { range:'Days 5–6',   task:'Early bird launch — exclusive offer to your most engaged followers (DMs + stories)', revenue: Math.round(total*0.25) },
+        { range:'Days 7–9',   task:'Full public launch — pinned post, launch reel, daily stories, multiple touchpoints', revenue: Math.round(total*0.40) },
+        { range:'Days 10–11', task:'Social proof push — share buyer results, testimonials, and DM screenshots', revenue: Math.round(total*0.20) },
+        { range:'Days 12–14', task:'Urgency close — countdown timer, "price goes up" reminder, final call stories', revenue: Math.round(total*0.15) },
+      ]
+    };
+  }
+
+  function fmtSBEarn(low, high) {
+    if (!high) return '—';
+    const f = n => n >= 1000 ? '$' + (Math.round(n/100)*100/1000).toFixed(1).replace(/\.0$/,'')+'K' : '$' + Math.round(n);
+    return (low && low > 0 ? f(low) + '–' : '') + f(high) + '/mo';
+  }
+
+  // ── Decode plan from URL hash ──
+  function decodePlan() {
+    const hash = window.location.hash.slice(1);
+    if (!hash) return null;
+    try {
+      return JSON.parse(decodeURIComponent(escape(atob(hash))));
+    } catch (_) {
+      return null;
+    }
+  }
+
+  // ── Render ──
+  function render(p) {
+    const name        = p.n  || 'Creator';
+    const handle      = (p.h || '').replace(/^@/, '');
+    const followersRaw= p.f  || '';
+    const niche       = p.ni || '';
+    const engagement  = p.e  || '';
+    const products    = p.p  || '';
+    const location    = p.l  || '';
+    const sb          = p.sb || null;
+
+    const followers   = parseFollowers(followersRaw);
+    const cat         = categorize(niche);
+    const productList = getProducts(cat);
+    const rev         = getRevenue(followers, sb && sb.earnHigh);
+    const proj        = get14Day(productList, followers);
+    const nicheShort  = niche.split('—')[0].split(',')[0].trim();
+
+    document.title = `${name}'s Monetization Plan — GBA Creative`;
+
+    // ── Audience analysis text ──
+    const insights = {
+      fitness:    'Your audience follows you because they want results — not just motivation. Fitness creators have some of the highest product conversion rates because every follower is already looking for a solution.',
+      postpartum: 'Your community trusts you because you\'ve been where they are. Postpartum audiences convert fast — the need is immediate, emotional, and real. You\'re exactly what they\'re looking for.',
+      finance:    'Your audience is outcome-driven. They want a clear path to saving more and stressing less about money. That means they\'re ready to pay for something that gets them there faster.',
+      food:       'Your audience shows up because your content makes their life easier. Recipe bundles, meal plans, and cooking guides are the natural next step — and they\'re ready for it.',
+      beauty:     'You\'ve already built the trust. Your audience wants to look the way you do and they\'re looking for a shortcut. A guide or course that teaches your exact process will convert.',
+      parenting:  'Parenting audiences are desperate for answers from someone who gets it. You\'re that person. A product that solves a specific problem — sleep, tantrums, routines — will sell itself.',
+      travel:     'Your audience is already in planning mode. They need an expert shortcut. Destination guides and budget tools convert well because the purchase happens right when the motivation is highest.',
+      business:   'Your audience is ready to invest. They follow you because they want what you have — and they understand that paying for guidance is how you get there faster.',
+      wellness:   'You\'ve built something rare: a genuinely loyal community. Your audience connects with you on a deeper level, which means when you launch something, they\'re the first to buy.',
+      ugc:        'You\'re in a position to teach others what you\'ve already figured out. Your audience is trying to get where you are, and a course or toolkit shortcutting the learning curve will convert.',
+      education:  'Your audience values structure and expertise — which is exactly what you offer. A well-organized course with clear outcomes is the most natural product extension for your channel.',
+      lifestyle:  'Your audience aspires to live the way you do. Digital products — planners, templates, mini courses — convert well because they\'re low-cost to produce and feel immediately useful.',
+      general:    'Your audience follows you because they trust your perspective. The key is launching a product that solves their most specific problem — and your content has already told us what that is.',
+    };
+
+    const tiers = { nano:'nano-creator', micro:'micro-creator', small:'rising creator', mid:'mid-tier creator', large:'large creator', major:'major creator' };
+    const tier = followers < 10000 ? 'nano' : followers < 50000 ? 'micro' : followers < 100000 ? 'small' : followers < 250000 ? 'mid' : followers < 1000000 ? 'large' : 'major';
+
+    // ── Revenue section ──
+    const myCon = Math.round(rev.conservative * 0.3);
+    const myOpt = Math.round(rev.optimistic * 0.3);
+    const creatorCon = rev.conservative - myCon;
+    const creatorOpt = rev.optimistic   - myOpt;
+
+    const sbEarnNote = sb && sb.earnHigh
+      ? `<div class="rev-note" style="margin-top:12px">Social Blade estimates this creator earns ${fmtSBEarn(sb.earnLow, sb.earnHigh)} from brand deals and sponsorships. Product revenue is typically 3–7× that — the numbers above reflect both data points.</div>`
+      : '';
+
+    // ── Timeline ──
+    const timelineRows = proj.days.map(d =>
+      `<div class="timeline-row">
+        <div class="timeline-range">${esc(d.range)}</div>
+        <div class="timeline-task">${esc(d.task)}</div>
+        <div class="timeline-rev">${d.revenue > 0 ? '~' + fmt(d.revenue) : '—'}</div>
+      </div>`
+    ).join('');
+
+    // ── Hero chips ──
+    const chips = [
+      handle      ? `@${esc(handle)}` : null,
+      followersRaw? `${esc(followersRaw)} followers` : null,
+      nicheShort  ? esc(nicheShort)   : null,
+      location    ? esc(location)     : null,
+    ].filter(Boolean).map(c => `<span class="hero-chip">${c}</span>`).join('');
+
+    // ── Engagement note ──
+    const engNote = engagement
+      ? `<p>We also noticed: ${esc(engagement.replace(/^people /i,'').replace(/^they /i,'').toLowerCase().trim())}. That pattern tells us your audience isn't just watching — they're actively looking for more from you.</p>`
+      : '';
+
+    const productNote = products && !/no product|nothing|don't have|doesn't have/i.test(products)
+      ? `<p>You currently have: <strong>${esc(products)}</strong>. We'd look at what's working and where there's room to add a higher-converting digital offer alongside it.</p>`
+      : `<p>You don't have a product yet — which means there's a clean, wide-open opportunity to launch something purpose-built for your audience with zero competition from yourself.</p>`;
+
+    const html = `
+      <div class="hero">
+        <div class="hero-eyebrow">Your Custom Monetization Plan</div>
+        <div class="hero-name">${esc(name)}</div>
+        <div class="hero-sub">We put this together specifically for you based on your audience, your content, and your niche. Here's what we see — and what we'd build.</div>
+        <div class="hero-chips">${chips}</div>
+      </div>
+
+      <div class="content">
+
+        <!-- 1. What we see in you -->
+        <div class="plan-section">
+          <div class="plan-section-header">
+            <div class="plan-section-num">1</div>
+            <div class="plan-section-title">What We See In Your Audience</div>
+          </div>
+          <div class="plan-card">
+            <p>You're a <strong>${tiers[tier]}</strong> with <strong>${esc(followersRaw)} followers</strong> in the <strong>${esc(nicheShort)}</strong> space${location ? ` based in <strong>${esc(location)}</strong>` : ''}.</p>
+            <p>${insights[cat] || insights.general}</p>
+            ${engNote}
+            ${productNote}
+          </div>
+        </div>
+
+        <!-- 2. Revenue potential -->
+        <div class="plan-section">
+          <div class="plan-section-header">
+            <div class="plan-section-num">2</div>
+            <div class="plan-section-title">What You Could Be Earning</div>
+          </div>
+          <div class="plan-card">
+            <div class="rev-grid">
+              <div class="rev-card">
+                <div class="rev-card-label">You Keep (Conservative)</div>
+                <div class="rev-card-value">${fmt(creatorCon)}</div>
+                <div class="rev-card-sub">per month</div>
+              </div>
+              <div class="rev-card">
+                <div class="rev-card-label">You Keep (Optimistic)</div>
+                <div class="rev-card-value">${fmt(creatorOpt)}</div>
+                <div class="rev-card-sub">with strong momentum</div>
+              </div>
+              <div class="rev-card">
+                <div class="rev-card-label">First Launch Target</div>
+                <div class="rev-card-value">${fmt(Math.round(proj.totalRevenue * 0.7))}</div>
+                <div class="rev-card-sub">your 70% of ${fmt(proj.totalRevenue)}</div>
+              </div>
+            </div>
+            <div class="rev-note">Based on ${esc(followersRaw)} followers in your niche. The split is simple: <strong>you keep 70%</strong>, GBA Creative takes 30% for handling all the strategy, setup, and launch execution.</div>
+            ${sbEarnNote}
+          </div>
+        </div>
+
+        <!-- 3. Product ideas -->
+        <div class="plan-section">
+          <div class="plan-section-header">
+            <div class="plan-section-num">3</div>
+            <div class="plan-section-title">3 Products Built For Your Audience</div>
+          </div>
+          <div class="plan-card">
+            ${productList.map((pr, i) => `
+              <div class="product-item">
+                <div class="product-price">${fmt(pr.price)}</div>
+                <div class="product-name">${i+1}. ${esc(pr.name)}</div>
+                <div class="product-desc">${esc(pr.desc)}</div>
+              </div>`).join('')}
+          </div>
+        </div>
+
+        <!-- 4. 14-day plan -->
+        <div class="plan-section">
+          <div class="plan-section-header">
+            <div class="plan-section-num">4</div>
+            <div class="plan-section-title">14-Day Launch Plan</div>
+          </div>
+          <div class="plan-card">
+            <p style="margin-bottom:16px">We'd start with <strong>${esc(proj.product.name)}</strong> at <strong style="color:var(--gold)">${fmt(proj.product.price)}</strong>. Here's the exact launch sequence — GBA Creative handles all of this with you.</p>
+            ${timelineRows}
+            <div class="timeline-total">
+              <span>Projected total: <strong>${fmt(proj.totalRevenue)}</strong></span>
+              <span style="color:var(--text-dim)">Your 70%: <strong class="gold">${fmt(Math.round(proj.totalRevenue * 0.7))}</strong></span>
+              <span style="color:var(--text-dim)">GBA's 30%: <strong style="color:var(--text-dim)">${fmt(Math.round(proj.totalRevenue * 0.3))}</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-card">
+          <h2>Ready to launch?</h2>
+          <p>This plan was built specifically for you and your audience. If you're open to a quick 15-minute call, we'll walk you through exactly how it works — no pressure, no pitch deck.</p>
+          <a class="cta-btn" href="mailto:gbacreativeco@gmail.com?subject=Game Plan — ${encodeURIComponent(name)}">Reply to Avery</a>
+          <div class="cta-fine">Or email directly: <a href="mailto:gbacreativeco@gmail.com">gbacreativeco@gmail.com</a></div>
+        </div>
+
+      </div>
+    `;
+
+    document.getElementById('app').innerHTML = html;
+  }
+
+  function renderError() {
+    document.getElementById('app').innerHTML = `
+      <div class="content">
+        <div class="error-state">
+          <h2>Plan not found</h2>
+          <p>This link may be missing data or was not generated correctly. If you received this from GBA Creative, reply to the email and ask for a new link.</p>
+          <p style="margin-top:16px"><a href="mailto:gbacreativeco@gmail.com" style="color:var(--gold)">gbacreativeco@gmail.com</a></p>
+        </div>
+      </div>`;
+  }
+
+  const plan = decodePlan();
+  if (plan) render(plan);
+  else renderError();
+
+})();
+</script>
+
+</body>
+</html>
